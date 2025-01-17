@@ -23,5 +23,10 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+    body {
+        background-color: #E0F1E8;
+        padding: 32px 16px;
+
+    }
 
 `;

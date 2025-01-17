@@ -1,14 +1,14 @@
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from './styles/GlobalStyles';
-import Router from './router/Router';
+import FormPage from './pages/formPage/FormPage';
 
 const App = () => {
 	return (
 		<BrowserRouter>
 			<GlobalStyles />
-			<Router>
-				</Router>	
-				</BrowserRouter>
+			{/* <Router></Router> */}
+			<FormPage />
+		</BrowserRouter>
 	);
 };
 
