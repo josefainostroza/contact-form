@@ -26,6 +26,17 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background-color: #E0F1E8;
         padding: 32px 16px;
+        font-family: 'karla';
+        font-weight: 400;
+        font-size: 16px;
+        color: #2A4144;
+
+
+    }
+    h1{
+        font-family: 'karla';
+        font-weight: 700;
+        font-size: 32px;
 
     }
 

@@ -1,9 +1,16 @@
 import { useForm } from 'react-hook-form';
 import {
+	StyledButton,
+	StyledConsent,
 	StyledContainer,
-	StyledContainerForm,
+	StyledErrorMessage,
 	StyledForm,
-	StyledQuery
+	StyledFormContainer,
+	StyledPositionName,
+	StyledQuery,
+	StyledQuerySelector,
+	Styledtextcontent,
+	StyledTextQuery
 } from './formPage.styles';
 
 const FormPage = () => {
@@ -18,74 +25,113 @@ const FormPage = () => {
 	console.log(watch('example')); // watch input value by passing the name of it
 	return (
 		<StyledContainer>
-			<h1>Contact Us</h1>
+			<h1>Contáctate Con Nosotros</h1>
 			<StyledForm onSubmit={handleSubmit(onSubmit)}>
-				<StyledContainerForm>
-					<label htmlFor='firstName'>First Name</label>
-					<input
-						{...register(
-							'firstName',
-							{
-								required: { value: true, message: 'Is empty' },
-								maxLength: { value: 20, message: '' }
-							},
-							{ pattern: /^[A-Za-z]+$/i }
+				<StyledPositionName>
+					<Styledtextcontent>
+						<label htmlFor='firstName'>Nombre</label>
+						<StyledFormContainer
+							{...register(
+								'firstName',
+								{
+									required: { value: true, message: 'Ingresa tu nombre' },
+									maxLength: { value: 10, message: 'Máximo 10 caracteres' }
+								},
+								{ pattern: /^[A-Za-z]+$/i }
+							)}
+							type='text'
+							id='firstName'
+						/>
+						{errors.firstName && (
+							<StyledErrorMessage>
+								{errors.firstName.message}
+							</StyledErrorMessage>
 						)}
-						type='text'
-						id='firstName'
+					</Styledtextcontent>
+					<Styledtextcontent>
+						<label htmlFor='lastName'>Apellido</label>
+						<StyledFormContainer
+							{...register(
+								'lastName',
+								{
+									required: { value: true, message: 'Ingresa tu apellido' },
+									maxLength: { value: 10, message: 'Máximo 10 caracteres' }
+								},
+								{ pattern: /^[A-Za-z]+$/i }
+							)}
+							type='text'
+							id='lastName'
+						/>
+						{errors.lastName && (
+							<StyledErrorMessage>{errors.lastName.message}</StyledErrorMessage>
+						)}
+					</Styledtextcontent>
+				</StyledPositionName>
+				<Styledtextcontent>
+					<label htmlFor='emailAddress'>E-mail</label>
+					<StyledFormContainer
+						{...register('email', {
+							required: { value: true, message: 'Ingresa tu email' }
+						})}
+						type='email'
+						id='email'
 					/>
-					{errors.firstName && <span>{errors.firstName.message}</span>}
-				</StyledContainerForm>
-				<StyledContainerForm>
-					<label htmlFor='lastName'>Last Name</label>
-					<input
-						{...register('lastName', { pattern: /^[A-Za-z]+$/i })}
-						type=''
-						id='lastName'
-					/>
-				</StyledContainerForm>
-
-				<StyledContainerForm>
-					<label htmlFor='emailAddress'>Email Address</label>
-					<input {...register('email')} type='email' />
-				</StyledContainerForm>
-				<StyledContainerForm>
-					<label htmlFor='QueryType'>Query Type</label>
+					{errors.email && (
+						<StyledErrorMessage>{errors.email.message}</StyledErrorMessage>
+					)}
+				</Styledtextcontent>
+				<Styledtextcontent>
+					<label htmlFor='QueryType'>Tipo de consulta</label>
 					<StyledQuery>
-						<div>
+						<StyledQuerySelector>
 							<input type='radio' name='query' id='enquiry' />
-							<label htmlFor='generalEnquiry'>General Enquiry</label>
-						</div>
-						<div>
+							<StyledTextQuery htmlFor='generalEnquiry'>
+								Información general
+							</StyledTextQuery>
+						</StyledQuerySelector>
+						<StyledQuerySelector>
 							<input type='radio' name='query' id='request' />
-							<label htmlFor='upportRequest'>Support Request</label>
-						</div>
+							<StyledTextQuery htmlFor='upportRequest'>
+								Solicitud de asistencia
+							</StyledTextQuery>
+						</StyledQuerySelector>
 					</StyledQuery>
-				</StyledContainerForm>
+				</Styledtextcontent>
+				<Styledtextcontent>
+					<label htmlFor='message'>Mensaje</label>
+					<StyledFormContainer
+						{...register('message', {
+							required: { value: true, message: 'Ingresa un mensaje' }
+						})}
+						type='text'
+						id='message'
+					/>
+					{errors.message && (
+						<StyledErrorMessage>{errors.message.message}</StyledErrorMessage>
+					)}
+				</Styledtextcontent>
 				<div>
-					<label htmlFor='message'>Message</label>
-					<input {...register('message')} />
+					<input
+						{...register('consent', {
+							required: {
+								value: true,
+								message: 'Debes aceptar el consentimiento'
+							}
+						})}
+						type='checkbox'
+						id='consent'
+					/>
+
+					<StyledConsent htmlFor='consent'>
+						Entrego mi consentimiento para que el equipo se ponga en contacto
+						conmigo*.{' '}
+					</StyledConsent>
+					{errors.consent && (
+						<StyledErrorMessage>{errors.consent.message}</StyledErrorMessage>
+					)}
 				</div>
-				<div>
-					<input {...register('consent')} type='checkbox' />
 
-					<label htmlFor='consent'>
-						I hereby consent to being contacted by the team *
-					</label>
-				</div>
-
-				{/* <input {...register('firstName', { required: true, maxLength: 20 })} />
-				<input {...register('lastName', { pattern: /^[A-Za-z]+$/i })} />
-				<input type='number' {...register('age', { min: 18, max: 99 })} />
-				<select {...register('gender')}>
-					<option value='female'>female</option>
-					<option value='male'>male</option>
-					<option value='other'>other</option>
-				</select>
-				<input {...register('exampleRequired', { required: true })} />
-				{errors.exampleRequired && <span>This field is required</span>} */}
-
-				<input type='submit' />
+				<StyledButton type='submit' />
 			</StyledForm>
 		</StyledContainer>
 	);
